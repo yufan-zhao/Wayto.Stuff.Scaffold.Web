@@ -1,0 +1,25 @@
+{
+  "name": "uxmid-vue-web",
+  "version": "1.0.0",
+  "description": "对iview进行升级的妥协解决方案",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/Wayto/uxmid-vue-web.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "peerDependencies": {
+    "uxmid-core": ">=^1.0.1",
+    "vue": "^2.6.10",
+    "vue-property-decorator": "^8.1.0",
+    "vuex-class": "^0.3.2",
+    "view-design": "^4.4.0"
+  }
+}
