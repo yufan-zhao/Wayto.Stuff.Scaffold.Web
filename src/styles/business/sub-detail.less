@@ -1,0 +1,93 @@
+.sub-detail
+{
+    height: 100%;
+    padding-top: 28px;
+    padding-right: 30px;
+    overflow-y: auto;
+    padding-bottom: 50px;
+    &-title
+    {
+        position: relative;
+        padding-left: 10px;
+        margin-top: 0;
+        margin-bottom: 27px;
+        font-size: 16px;
+        color: #182334;
+        font-weight: bold;
+    }
+    &-title::before {
+        content: "";
+        display: inline-block;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+        width: 3px;
+        height: 14px;
+        background: #3375f4;
+        margin-right: 8px;
+    }
+    .sub-content
+    {
+        margin-left: 10px;
+        margin-bottom: 30px;
+    }
+}
+.total-text
+{
+    font-size:14px;
+    font-family:Microsoft YaHei;
+    font-weight:400;
+    color:rgba(24,35,52,1);
+    line-height:28px;
+}
+
+// 带有i-row的分栏form表格
+.u-form
+{
+    .u-row
+    {
+        margin-bottom: 15px;
+
+        .u-col
+        {
+            padding-right: 10px;
+        }
+    }
+    .u-form-item
+    {
+        position: relative;
+        width: 100%;
+        margin-bottom: 6px;
+
+        @{deep}.ivu-form-item-label
+        {
+            position: relative;
+            display: flex;
+            padding: 0;
+            align-items: center;
+            font-size: 14px;
+            line-height: 20px;
+            color: #A6ABB5;
+            text-align: right;
+        }
+        @{deep}.ivu-form-item-label:after
+        {
+            content: "：";
+            position: relative;
+            right: 0;
+        }
+        @{deep}.ivu-form-item-content
+        {
+            font-size: 14px;
+            line-height: 20px;
+            color: #182334;
+        }
+    }
+}
+
+/deep/.ivu-poptip-rel
+{
+    width: 100%;
+}

@@ -1,0 +1,10 @@
+export { default as AuthService } from "./auth/auth-service";
+export { default as UserService } from "./auth/user-service";
+export { default as OrgService } from "./system/org-service";
+export { default as RoleService } from "./system/role-service";
+export { default as RoleTemplateService } from "./system/role-template-service";
+export { default as PermissionService } from "./system/permission-service";
+export { default as DictService } from "./system/dict-service";
+export { default as UploadService } from "./system/upload-service";
+export { default as CommonFileService } from "./system/common-file-service";
+export { default as WeatherService } from "./system/weather-service";

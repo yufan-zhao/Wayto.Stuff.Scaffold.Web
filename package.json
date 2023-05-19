@@ -6,7 +6,8 @@
   "author": "yufan-zhao <yufan.zhao@hotmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "npx webpack --config webpack.config.js"
+    "build": "npx webpack --config webpack.config.js",
+    "dll:base": "npx webpack --config webpack.dll.config.js"
   },
   "devDependencies": {
     "css-loader": "^6.7.3",
@@ -14,6 +15,7 @@
     "html-webpack-plugin": "^5.5.1",
     "style-loader": "^3.3.2",
     "ts-loader": "^9.4.2",
+    "tslint-config-flagwind": "^1.0.1",
     "typescript": "^5.0.4",
     "vue-template-compiler": "^2.7.14",
     "webpack": "^5.82.1",
@@ -21,7 +23,10 @@
     "webpack-dev-server": "^4.15.0"
   },
   "dependencies": {
+    "axios": "^1.4.0",
+    "dayjs": "^1.11.7",
     "uxmid-core": "^1.0.1",
+    "view-design": "^4.7.0",
     "vue": "2.7.14",
     "vue-class-component": "^7.2.6",
     "vue-property-decorator": "^9.1.2",

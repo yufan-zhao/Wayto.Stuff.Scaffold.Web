@@ -1,0 +1,25 @@
+.special-sidebar-ops-poptip.ivu-poptip-popper
+{
+    min-width: 92px;
+    z-index: 900 !important;
+
+    .ivu-poptip-body-content
+    {
+        .ops-btns
+        {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .btn
+        {
+            line-height: 24px;
+            cursor: pointer;
+            transition: color ease-in-out 0.2s;
+        }
+        .btn:hover
+        {
+            color: lighten(#333333, 10%);
+        }
+    }
+}

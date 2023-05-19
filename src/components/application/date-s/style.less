@@ -1,0 +1,51 @@
+@charset "UTF-8";
+@import "~styles/application/variables";
+
+.u-date
+{
+    border: 1px solid #ECECEC;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    .split
+    {
+        display: inline-block;
+        width: 6px;
+        height: 1px;
+        background: #70737B;
+    }
+    
+    .ivu-date-picker
+    {
+        width: 110px;
+
+        
+        
+        &-focused
+        {
+            input
+            {
+                box-shadow: none;
+            }
+        }
+        .ivu-input-suffix
+        {
+            display: none;
+        }
+        input
+        {
+            border: none;
+            &:focus,&:hover
+            {
+                box-shadow: none !important; 
+            }
+        }
+        
+    }
+    .ivu-icon
+    {
+        font-size: 16px;
+        cursor: pointer;
+        padding-right: 10px;
+    }
+}

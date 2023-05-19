@@ -1,0 +1,101 @@
+.menu-instance
+{
+    .sub-title
+    {
+        display: flex;
+        align-items: center;
+        height: 68px;
+        padding-left: 20px;
+        background-color: #3375f4;
+        overflow: hidden;
+
+        .label
+        {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            white-space: nowrap;
+            transition: all ease-in-out 0.3s;
+        }
+        .logo-img
+        {
+            width: 32px;
+            height: 32px;
+            margin-right: 10px;
+        }
+    }
+    .menu-instance-sub
+    {
+        @{deep}.ivu-menu-submenu-title
+        {
+            display: flex;
+            align-items: center;
+            padding: 0;
+            height: 54px;
+
+            .iconfont
+            {
+                margin-left: 26px;
+                font-size: 18px;
+                margin-right: 18px;
+            }
+        }
+    }
+    .menu-instance-item
+    {
+        display: flex;
+        align-items: center;
+        height: 54px;
+        padding: 0 !important;
+        color: #7E8791;
+
+        i
+        {
+            margin-left: 22px;
+            font-size: 18px;
+            margin-right: 18px;
+        }
+        span
+        {
+            white-space: nowrap;
+            transition: all ease-in-out 0.3s;
+        }
+    }
+    .menu-instance-item::before
+    {
+        content: " ";
+        width: 3px;
+        height: 100%;
+    }
+    .menu-instance-item.ivu-menu-item-selected
+    {
+        color: #fff;
+
+        i
+        {
+            color: #3375f4;
+        }
+    }
+    .menu-instance-item.ivu-menu-item-selected::before
+    {
+        background-color: #3375f4;
+    }
+}
+.menu-instance.collapsed-menu
+{
+    .sub-title
+    {
+        .label
+        {
+            opacity: 0;
+        }
+    }
+
+    .menu-instance-item
+    {
+        span
+        {
+            opacity: 0;
+        }
+    }
+}

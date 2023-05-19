@@ -1,0 +1,83 @@
+@charset "utf-8";
+
+.u-map-modal
+{
+    .ivu-modal-content
+    {
+        height: 460px;
+    }
+
+    .el-dialog__header
+    {
+        display: none;
+    }
+}
+
+.u-map-close
+{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 3px;
+    cursor: pointer;
+
+    i
+    {
+        font-size: 20px;
+    }
+}
+
+.u-map-controll
+{
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+
+    button
+    {
+        // background: #000;
+        margin-left: 10px;
+    }
+
+    .ivu-btn-default
+    {
+        background: #FFFFFF;
+        border-color: rgba(64, 159, 255, 0.38);
+    }
+}
+
+.u-map-entry
+{
+    position: relative;
+    cursor: pointer;
+
+    input
+    {
+        cursor: pointer;
+        padding-right: 32px;
+        text-overflow: ellipsis;
+    }
+
+    > button
+    {
+        min-width: auto;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        width: 40px;
+        position: absolute;
+        top: 1px;
+        right: 0;
+        height: 32px !important;
+        border-radius: 0 4px 4px 0;
+
+        & > *
+        {
+            vertical-align: middle;
+        }
+        
+        i
+        {
+            font-size: 18px;
+        }
+    }
+}
