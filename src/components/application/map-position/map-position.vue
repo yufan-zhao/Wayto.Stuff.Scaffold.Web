@@ -32,9 +32,9 @@
 </template>
 
 <script lang="ts">
-import { component, View, mixins, config, watch } from "uxmid-web";
+import { component, View, mixins, config, watch } from "uxmid-vue-web";
 
-import MapPicker from "components/application/map-picker";
+import MapPicker from "src/components/application/map-picker";
 import globalConfig from "src/common/utils/global";
 
 @component

@@ -1,4 +1,4 @@
-import { imagePath } from "filters/common";
+import { imagePath } from "src/common/filters/common";
 
 class UploadAdapter
 {

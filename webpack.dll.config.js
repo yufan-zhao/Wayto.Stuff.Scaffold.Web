@@ -6,7 +6,7 @@ module.exports =
     mode: "development",
     entry:
     {
-        core:
+        uxmid:
         [
             "uxmid-core"
         ],
@@ -14,8 +14,9 @@ module.exports =
         [
             "axios",
             "dayjs",
+            "viewerjs"
         ],
-        style:
+        iview:
         [
             "view-design"
         ],

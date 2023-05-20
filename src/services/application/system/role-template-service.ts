@@ -1,4 +1,3 @@
-import { IHttpResponse } from "src/models";
 import { Injectable } from "uxmid-core";
 import { httpConfig } from "src/common/http";
 

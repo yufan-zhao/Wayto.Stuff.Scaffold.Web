@@ -1,1 +1,1 @@
-export { default as IAmapSettings } from "./amap-settings";
+export type { default as IAmapSettings } from "./amap-settings";

@@ -10,13 +10,18 @@
     "dll:base": "npx webpack --config webpack.dll.config.js"
   },
   "devDependencies": {
+    "@types/webpack-env": "^1.18.0",
     "css-loader": "^6.7.3",
     "html-loader": "^4.2.0",
     "html-webpack-plugin": "^5.5.1",
+    "less": "3.0.4",
+    "less-loader": "^11.1.0",
     "style-loader": "^3.3.2",
+    "style-resources-loader": "^1.5.0",
     "ts-loader": "^9.4.2",
     "tslint-config-flagwind": "^1.0.1",
     "typescript": "^5.0.4",
+    "vue-loader": "15.10.1",
     "vue-template-compiler": "^2.7.14",
     "webpack": "^5.82.1",
     "webpack-cli": "^5.1.1",
@@ -25,11 +30,14 @@
   "dependencies": {
     "axios": "^1.4.0",
     "dayjs": "^1.11.7",
+    "md5": "^2.3.0",
     "uxmid-core": "^1.0.1",
     "view-design": "^4.7.0",
+    "viewerjs": "^1.11.3",
     "vue": "2.7.14",
     "vue-class-component": "^7.2.6",
     "vue-property-decorator": "^9.1.2",
-    "vue-router": "3.6.5"
+    "vue-router": "3.6.5",
+    "wangeditor": "^4.7.15"
   }
 }

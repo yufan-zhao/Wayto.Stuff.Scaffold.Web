@@ -16,8 +16,8 @@
 </template>
 
 <script lang="ts">
-import { component, View, mixins, config, watch } from "flagwind-web";
-import MapBox from "components/application/map-box";
+import { component, View, mixins, config, watch } from "uxmid-vue-web";
+import MapBox from "src/components/application/map-box";
 import globalConfig from "src/common/utils/global";
 
 @component
@@ -94,7 +94,7 @@ export default class Consoles extends View
      */
     private get defaultIconPath(): string
     {
-        return require("assets/application/map.png");
+        return require("src/assets/application/map.png");
     }
 
     /**

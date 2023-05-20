@@ -1,6 +1,6 @@
 import { HttpClient } from "src/common/http";
 import Axios from "axios";
-import { IHttpAnnotationConfig, IHttpRequest, IHttpResponse } from "src/models";
+import type { IHttpAnnotationConfig, IHttpRequest, IHttpResponse } from "src/models";
 import { ApplicationContext } from "src/application";
 
 export default abstract class BaiduYingyanBaseService

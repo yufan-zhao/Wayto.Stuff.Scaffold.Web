@@ -1,0 +1,11 @@
+export { default as TestContent } from "./test-content.vue";
+export { default as Meeting } from "./meeting.vue";
+export { default as Progress } from "./progress.vue";
+export { default as Highlights } from "./highlights.vue";
+export { default as Performance } from "./performance.vue";
+export { default as Report } from "./report.vue";
+export { default as Total } from "./total.vue";
+export { default as ReportDevice } from "./report-device.vue";
+export { default as ReportDanger } from "./report-danger.vue";
+export { default as SafetyKnowledge } from "./safety-knowledge.vue";
+export { default as SafetyCalendar } from "./safety-calendar.vue";

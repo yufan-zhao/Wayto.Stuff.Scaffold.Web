@@ -1,6 +1,6 @@
 <template>
     <div class="u-nodata">
-        <img src="~assets/application/none-data.png" :alt="label" />
+        <img src="src/assets/application/none-data.png" :alt="label" />
         <p>{{label}}</p>
     </div>
 </template>

@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts">
-import { component, View, mixins, config, watch } from "flagwind-web";
+import { component, View, mixins, config, watch } from "uxmid-vue-web";
 import globalConfig from "src/common/utils/global";
 
 @component

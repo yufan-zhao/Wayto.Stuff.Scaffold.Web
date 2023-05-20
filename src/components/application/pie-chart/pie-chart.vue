@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-import { component, Component, config, watch } from "uxmid-web";
+import { component, Component, config, watch } from "uxmid-vue-web";
 
 @component
 export default class BarChart extends Component

@@ -1,4 +1,4 @@
-import { IHttpResponse, IViewCascaderData } from "src/models";
+import type { IHttpResponse, IViewCascaderData } from "src/models";
 import { Injectable } from "uxmid-core";
 import { httpConfig } from "src/common/http";
 

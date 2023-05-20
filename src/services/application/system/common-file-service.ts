@@ -1,5 +1,5 @@
 import { Injectable } from "uxmid-core";
-import { IHttpResponse, IHttpRequest, IPaginFilterModel } from "src/models";
+import type { IHttpResponse, IHttpRequest, IPaginFilterModel } from "src/models";
 
 import ServiceBase from "../../service-base";
 import { sendHttpMessage } from "src/common/http/http-tool";

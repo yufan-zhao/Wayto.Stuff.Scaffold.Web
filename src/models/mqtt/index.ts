@@ -1,1 +1,1 @@
-export { default as IMqttSettings } from "./mqtt-settings";
+export type { default as IMqttSettings } from "./mqtt-settings";

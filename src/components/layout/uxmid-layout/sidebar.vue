@@ -2,7 +2,7 @@
     <div class="layout-sidebar">
         <div class="header">
             <span class="logo-container">
-                <img src="~/assets/logo-banner.png" />
+                <img src="src/assets/logo-banner.png" />
             </span>
             <!-- <span class="brand">智慧工程安全</span> -->
         </div>

@@ -1,7 +1,7 @@
 import { Injectable, BroadcastManager, Broadcast, Map, Logger } from "uxmid-core";
 import { httpConfig } from "src/common/http";
 import ServiceBase from "../../service-base";
-import { IHttpResponse, IHttpRequest, LoginBroadcastMapKeys } from "src/models";
+import type { IHttpResponse, IHttpRequest, LoginBroadcastMapKeys } from "src/models";
 import { BroadcastChannels } from "src/broadcasts";
 import { ExtendUtils } from "src/common/utils";
 

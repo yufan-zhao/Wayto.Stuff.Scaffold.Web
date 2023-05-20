@@ -7,7 +7,8 @@ import { AuthService, PermissionService } from "src/services";
 export default
 {
     checkTokenValid,
-    loadMenus
+    loadMenus,
+    findFirstRouteName
 };
 
 /**
@@ -103,4 +104,34 @@ export function loadMenus(menus: Array<IApplicationMenu>, permissionCodes: Array
         }
     }
     return result;
+}
+
+export function findFirstRouteName(menus: Array<IApplicationMenu>)
+{
+    for (let i = 0; i < menus.length; i++)
+    {
+        let item = menus[i];
+        if (item.routeName)
+        {
+            return item.routeName;
+        }
+
+        if (Array.isArray(item.children))
+        {
+            let tempTarget = findFirstRouteName(item.children);
+            if (tempTarget)
+            {
+                return tempTarget;
+            }
+        }
+
+        if (Array.isArray(item.tabChildren))
+        {
+            let tempTarget = findFirstRouteName(item.tabChildren);
+            if (tempTarget)
+            {
+                return tempTarget;
+            }
+        }
+    }
 }

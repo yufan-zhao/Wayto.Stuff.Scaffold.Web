@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts">
-import { component, View, mixins, config, watch } from "uxmid-web";
+import { component, View, mixins, config, watch } from "uxmid-vue-web";
 import { Broadcast, BroadcastManager, Application, Map } from "uxmid-core";
 import CommonView from "src/views/common-view";
 import { BroadcastChannels } from "src/broadcasts";

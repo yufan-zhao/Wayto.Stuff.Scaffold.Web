@@ -1,7 +1,7 @@
 <template>
     <i-menu theme="dark" width="auto" class="menu-instance" :class="menuitemClasses">
         <div class="sub-title">
-            <img class="logo-img" src="~assets/application/logo.png" alt="logo">
+            <img class="logo-img" src="src/assets/application/logo.png" alt="logo">
             <span class="label">后台管理</span>
         </div>
 

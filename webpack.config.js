@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { VueLoaderPlugin } = require("vue-loader");
 
 module.exports =
 {
@@ -12,7 +13,7 @@ module.exports =
     },
     output:
     {
-        filename: "[name].bundle.js",
+        filename: "[name].[contenthash].js",
         path: path.resolve(__dirname, "dist"),
         clean: true
     },
@@ -21,7 +22,7 @@ module.exports =
         rules:
         [
             {
-                test: /\.tsx?$/,
+                test: /\.(tsx|ts)?$/,
                 use:
                 [
                     {
@@ -35,11 +36,43 @@ module.exports =
                 exclude: /node_modules/,
             },
             {
+                test: /\.vue?$/,
+                use: ["vue-loader"]
+            },
+            {
+                test: /\.less$/i,
+                use:
+                [
+                    "style-loader",
+                    "css-loader",
+                    {
+                        loader: "less-loader",
+                        options:
+                        {
+                            lessOptions:
+                            {
+                                javascriptEnabled: true
+                            }
+                        }
+                    },
+                    {
+                        loader: "style-resources-loader",
+                        options:
+                        {
+                            patterns:
+                            [
+                                path.resolve(__dirname, "src/styles/application/variables.less")
+                            ]
+                        }
+                    }
+                ]
+            },
+            {
                 test: /\.css$/i,
                 use: ["style-loader", "css-loader"]
             },
             {
-                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                test: /\.(png|svg|jpg|jpeg|gif|cur)$/i,
                 type: "asset/resource"
             },
             {
@@ -50,13 +83,35 @@ module.exports =
     },
     resolve:
     {
-        extensions: [".tsx", ".ts", ".js"]
+        extensions: [".tsx", ".ts", ".js"],
+        alias:
+        {
+            "uxmid-vue-web": path.resolve(__dirname, "uxmid-vue-web/src"),
+            "src": path.resolve(__dirname, "src")
+        }
+    },
+    optimization:
+    {
+        runtimeChunk: "single",
+        splitChunks:
+        {
+            cacheGroups:
+            {
+                vendor:
+                {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: "vendors",
+                    chunks: "all"
+                }
+            }
+        }
     },
     plugins:
     [
         new HtmlWebpackPlugin({
             title: process.env.npm_package_name,
             template: "./public/index.html"
-        })
+        }),
+        new VueLoaderPlugin()
     ]
 };

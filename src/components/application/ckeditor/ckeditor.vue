@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-import { component, View, mixins, config, watch } from "uxmid-web";
+import { component, View, mixins, config, watch } from "uxmid-vue-web";
 import UploadAdapter from "./upload-adapter";
 
 @component

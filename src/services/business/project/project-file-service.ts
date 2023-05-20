@@ -1,5 +1,5 @@
 
-import { IHttpResponse, IHttpRequest, IPaginFilterModel } from "src/models";
+import type { IHttpResponse, IHttpRequest, IPaginFilterModel } from "src/models";
 import { Injectable } from "uxmid-core";
 import dayjs from "dayjs";
 import { httpConfig } from "src/common/http";

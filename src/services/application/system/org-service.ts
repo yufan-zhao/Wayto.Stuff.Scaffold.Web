@@ -1,7 +1,7 @@
 import { Injectable } from "uxmid-core";
 import { httpConfig } from "src/common/http";
 import { ExtendUtils } from "src/common/utils";
-import { IViewCascaderData, IHttpResponse } from "src/models";
+import type { IViewCascaderData, IHttpResponse } from "src/models";
 
 import ServiceBase from "../../service-base";
 

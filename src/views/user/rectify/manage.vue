@@ -1,0 +1,394 @@
+<template>
+    <div class="manage-view">
+        <u-page-content :class="{open: isOpenOperation}" :isOpenOperation="isOpenOperation">
+            <i-form slot="search-left" ref="searchBox" @submit.native.prevent>
+                <i-form-item label="关键字：">
+                    <i-input placeholder="姓名/手机号/账号" v-model="filters.personnelInformation" @on-clear="onSearch" @keyup.native.enter="onSearch" clearable></i-input>
+                </i-form-item>
+
+                <i-form-item label="部门：">
+                    <i-cascader :data="selectListObj.orgRree" v-model="filters.userGroupIds" change-on-select filterable @on-change="userGroupValueChange"></i-cascader>
+                </i-form-item>
+
+                <i-form-item label="角色：" @on-change="onSearch" clearable>
+                    <i-select  v-model="filters.roleId" maxlength="20">
+                        <i-option v-for="item in selectListObj.roleList" :key="item.id" :value="item.id">{{item.name}}</i-option>
+                    </i-select> 
+                </i-form-item>
+
+                <i-form-item label="状态：">
+                    <i-select v-model="filters.enable" maxlength="20" @on-change="onSearch" clearable>
+                        <i-option :value="0">离线</i-option>
+                        <i-option :value="1">在线</i-option>
+                    </i-select> 
+                </i-form-item>
+
+                <i-form-item>
+                    <i-button type="primary" @click="onSearch">查询</i-button>
+                    <i-button type="info" @click="onReset">重置</i-button>
+                    <!-- <i-button type="info" @click="isOpenOperation = !isOpenOperation">{{isOpenOperation ? "收起" : "高级搜索"}}</i-button> -->
+                </i-form-item>
+            </i-form>
+
+            <template slot="operation-btn">
+                <i-button type="primary" @click="onOperations('insert')" v-permission="permissionCode.USER_RECTIFY_XZ">新增</i-button>
+            </template>
+
+            <!-- 高级搜索列 BEGIN-->
+            <i-form slot="senior">
+                <i-row class="row-inputs" type="flex" justify="start">
+                    <i-form-item class="input-item" label="客户名称：">
+                        <i-input placeholder="项目名称/编号/施工单位/姓名/手机"></i-input>
+                    </i-form-item>
+                </i-row>
+            </i-form>
+            <!-- 高级搜索列 END-->
+
+            <template slot="page-table">
+                <ux-switch-table 
+                    ref="switchTable" 
+                    :row-columuns="rowColumuns" 
+                    :col-columuns="colColumuns"
+                    :load-func="testPaginTableService.pagin.bind(testPaginTableService)"
+                    @on-row-click="onRowClick"
+                    @no-data="detail = {}"
+                >
+                    <template slot="detail">
+                        <u-detail ref="detail" :detail="detail" @operations="onOperations" :selectListObj="selectListObj"></u-detail>
+                    </template>
+                </ux-switch-table>
+            </template>
+        </u-page-content>
+
+        <main-insert-update-modal
+            ref="mainInsertUpdateModal"
+            :insert="testPaginTableService.insert.bind(testPaginTableService)"
+            :update="testPaginTableService.update.bind(testPaginTableService)"
+            @on-refresh="onSearch"
+            :selectListObj="selectListObj"
+        >
+        </main-insert-update-modal>
+    </div>
+</template>
+
+<script lang="ts">
+import { component, View, watch } from "uxmid-vue-web";
+import CommonView from "src/views/common-view";
+import ManageDetail from "./detail.vue";
+import { DiagnosService, OrgService, RoleService, DictService, ProjectService } from "src/services";
+import { service } from "src/common/decorator";
+import { ExtendUtils } from "src/common/utils";
+import InsertUpdateModal from "./_components/insert-update-modal.vue";
+import { SYSTEM_CONFIG_TYPE } from "src/enums";
+
+@component({
+    components:
+    {
+        "u-detail": ManageDetail,
+        "main-insert-update-modal": InsertUpdateModal
+    }
+})
+export default class ManageView extends CommonView
+{
+    @service("DiagnosService")
+    protected testPaginTableService: DiagnosService;
+
+    @service("OrgService")
+    protected orgService: OrgService;
+
+    @service("ProjectService")
+    protected projectService: ProjectService;
+
+    @service("DictService")
+    protected dictService: DictService;
+
+    @service("RoleService")
+    protected roleService: RoleService;
+
+    /**
+     * 是否展开高级搜索
+     * @protected
+     * @property
+     */
+    protected isOpenOperation: boolean = false;
+
+    /**
+     * 当前项详情
+     * @protected
+     * @property
+     */
+    protected detail: any = {};
+
+    /**
+     * 筛选条件（除去分页）
+     * @property
+     */
+    protected filters: any =
+    {
+        userGroupId: undefined,
+        enable: undefined,
+        roleId: undefined,
+        keyword: undefined
+    };
+
+    /**
+     * 筛选来源数据集合（除去分页）
+     * @property
+     */
+    protected selectListObj: any = {};
+
+    /**
+     * 表格列表模式行渲染
+     * @member
+     * @protected
+     * @returns {Array<any>}
+     */
+    protected rowColumuns: Array<any> =
+    [
+        {
+            title: "姓名",
+            key: "name"
+        },
+        {
+            title: "年龄",
+            key: "age"
+        },
+        {
+            title: "性别",
+            key: "gender"
+        }
+    ];
+
+    /**
+     * 表格详情模式行渲染
+     * @member
+     * @protected
+     * @returns {Array<any>}
+     */
+    protected colColumuns: Array<any> =
+    [
+        {
+            render: (h, {row}: any) =>
+            {
+                let nameDiv = ExtendUtils.tooltipElement(row.name, 14, h, "300px", "strong","f18 vb");
+                // let tip = ExtendUtils.createTipElement(h, "重大风险", "#FF4D3F", false);
+                let statusTip = ExtendUtils.createStatusElement(h, row.enable ? "在线" : "离线", row.enable ? "#40C16A" : "#838D9C", row.enable);
+
+                return h("div", {class: "col-container"}, [
+                    h("div", {class: "content"}, [
+                        // 标题部分
+                        h("i-row", {class: "title"}, [
+                            h("i-col", {attrs: {span: "24"}}, [nameDiv]),
+                            h("span", {class: "status-tips"}, [statusTip])
+                        ]),
+                        // 说明部分
+                        h("i-row", {class: "desc"}, [
+                            h("i-col", {attrs: {span: "24"}}, `电话：${row.mobilePhone || "-"}`),
+                            h("i-col",
+                                {attrs: {span: "24"}},
+                                `角色：${row.jsName || "-"}`)
+                        ])
+                    ])
+                ]);
+            }
+        }
+    ];
+
+    /**
+     * 触发查询列表
+     * @member
+     * @protected
+     * @returns {void}
+     */
+    protected onSearch(): void
+    {
+        this._switchTable.search(this.filters);
+    }
+
+    /**
+     * 选择部门触发
+     * @member
+     * @protected
+     * @returns {void}
+     */
+    protected userGroupValueChange(value: any, selectedData: any): void
+    {
+        this.filters.userGroupId = value[value.length - 1];
+
+        this.onSearch();
+    }
+
+    /**
+     * 触发重置查询方法
+     * @member
+     * @protected
+     * @returns {void}
+     */
+    protected onReset(): void
+    {
+        this.filters = {};
+        this._switchTable.reset();
+    }
+
+    /**
+     * 列表操作
+     * @protected
+     * @member
+     */
+    protected async onOperations(type: string, data?: any)
+    {
+        switch(type)
+        {
+            case "insert":
+            {
+                this._mainInsertUpdateModal.open();
+                break;
+            }
+            case "update":
+            {
+                this._mainInsertUpdateModal.open(JSON.parse(JSON.stringify(data)));
+                break;
+            }
+            case "delete":
+            {
+                this.$modal.confirm({
+                    title: "提示",
+                    content: "您确定要删除该施工单位吗？",
+                    onOk: async () =>
+                    {
+                        try
+                        {
+                            await this.testPaginTableService.virtualRemoveById(data.id);
+                            this.$message.success("操作成功");
+                            this.onSearch();
+                        } catch (error) {
+                            this.$message.error("操作失败：" + error.msg);
+                        }
+                    }
+                });
+                break;
+            }
+            case "reset":
+            {
+                this.$modal.confirm({
+                    title: "提示",
+                    content: "您确定要重置吗？重置后的密码为123456",
+                    onOk: async () =>
+                    {
+                        try
+                        {
+                            await this.testPaginTableService.resetPsw({data: {id: data.userId,password: 123456}});
+                            this.$message.success("操作成功");
+                            this.onSearch();
+                        } catch (error) {
+                            this.$message.error("操作失败：" + error.msg);
+                        }
+                    }
+                });
+                break;
+            }
+            default:
+            {
+                // do nothing
+                break;
+            }
+        }
+    }
+
+    /**
+     * 触发列表选中操作
+     * @member
+     * @protected
+     * @returns {void}
+     */
+    protected async onRowClick(row: any, index?: number): Promise<void>
+    {
+        if (row)
+        {
+            this.detail = JSON.parse(JSON.stringify(row)) || {};
+        }
+    }
+
+    /**
+     * switchTable组件类
+     * @ref
+     */
+    private get _switchTable(): any
+    {
+        return this.$refs["switchTable"] as any;
+    }
+
+    /**
+     * 主新增编辑弹层
+     * @ref
+     */
+    private get _mainInsertUpdateModal(): InsertUpdateModal
+    {
+        return this.$refs["mainInsertUpdateModal"] as InsertUpdateModal;
+    }
+
+    protected created()
+    {
+        this.selectList();
+    }
+
+    /**
+     * 获得选项框的数据
+     * @ref
+     */
+    protected async selectList()
+    {
+        let roleList = await this.roleService.list();
+        this.selectListObj.roleList = roleList; // 角色列表
+
+        let orgRree = await this.orgService.tree();
+        this.selectListObj.orgRree = [];
+        this.transferTree(null, orgRree.children);// 责任部门
+
+        let groundName = await this.dictService.getTargetContentList(SYSTEM_CONFIG_TYPE.GROUP_NAME);
+        this.selectListObj.groundName = groundName; // 诊治组名
+
+        let projectList = await this.projectService.listDetails();
+        this.selectListObj.projectList = projectList.content; // 项目列表
+    }
+
+    /**
+     * 处理组织架构
+     * @ref
+     */
+    protected transferTree(parentData: any = {}, data: any): any
+    {
+        if (parentData)
+        {
+            const children = data.filter(item => item.parentId === parentData.id);
+            if (children.length)
+            {
+                children.forEach(item =>
+                {
+                    item.label = item.name;
+                    item.value = item.id;
+                    item.children = this.transferTree(item, data);
+                });
+                return children;
+            } else {
+                return [];
+            }
+        } else {
+            data.filter(item => data.filter(e => e.id === item.parentId).length === 0).forEach(item =>
+            {
+                item.label = item.name;
+                item.value = item.id;
+                item.children = this.transferTree(item, data);
+                this.selectListObj.orgRree.push(item);
+            });
+        }
+    }
+}
+</script>
+
+<style lang="less" scoped>
+.manage-view
+{
+    height: 100%;
+}
+</style>

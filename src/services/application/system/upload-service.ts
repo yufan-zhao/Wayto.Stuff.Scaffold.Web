@@ -1,6 +1,6 @@
 import { httpConfig } from "src/common/http";
 import { sendHttpMessage } from "src/common/http/http-tool";
-import { IHttpResponse } from "src/models";
+import type { IHttpResponse } from "src/models";
 import { Injectable } from "uxmid-core";
 
 import ServiceBase from "../../service-base";

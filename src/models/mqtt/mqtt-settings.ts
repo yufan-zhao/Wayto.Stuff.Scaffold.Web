@@ -1,4 +1,4 @@
-export default interface IMqttSettings
+interface IMqttSettings
 {
     /**
      * mqtt服务ip地址
@@ -9,3 +9,5 @@ export default interface IMqttSettings
      */
     readonly port: number;
 }
+
+export default IMqttSettings;

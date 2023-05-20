@@ -49,7 +49,7 @@ export function numberRound(digit: number, length: any)
  * @param pirceSymbol
  * @param length
  */
-export function formartPrice(price: string | number, isShowSymbol: boolean = true, pirceSymbol?: string, length?: number)
+export function formartPrice(price, isShowSymbol: boolean = true, pirceSymbol?: string, length?: number)
 {
     if(!price && price !== 0)
     {

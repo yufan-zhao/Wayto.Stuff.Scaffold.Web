@@ -1,0 +1,151 @@
+<template>
+    <div class="sub-detail">
+
+        <i-table class="table-normal mb20" :data="data" :columns="columuns2"></i-table>
+                                
+    </div>
+
+</template>
+
+<script lang="ts">
+import { component, View, watch, config } from "uxmid-vue-web";
+import { ProjecthighlightsService } from "src/services";
+import { service } from "src/common/decorator";
+import { imagePath } from "src/common/utils/extend-utils";
+@component
+export default class InfoView extends View
+{
+    @service("ProjecthighlightsService")
+    protected projecthighlightsService: ProjecthighlightsService;
+
+    protected showTable = false;
+
+    protected showTableId = 0;
+
+    protected data: any = [{}];
+
+    // protected columuns2: Array<any> =
+    // [
+    //     {
+    //         title: "现场照片",
+    //         width: 220,
+    //         render: (h, {row}: any) =>
+    //         {
+    //             return h("div",
+    //             {
+    //                 class: "img-box-item",
+    //                 style:
+    //                 {
+    //                     background: "url(https://ts3.cn.mm.bing.net/th?id=OIP-C.S3QOsgnlzrpbpAdOXF4YMAHaEo&w=316&h=197&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2) no-repeat center center",
+    //                     backgroundSize: "cover",
+    //                     width: "208px",
+    //                     height: "117px",
+    //                     "border-radius": "2px",
+    //                     overflow: "hidden"
+    //                 }
+    //             },
+    //             [
+    //                 h("img",
+    //                 {
+    //                     attrs: {src: imagePath(item.filePath)},
+    //                     style: {
+    //                         opacity: 0,
+    //                         width: "100%",
+    //                         height: "100%"
+    //                     }
+    //                 })
+    //             ]);
+    //         }
+    //     },
+    //     {
+    //         title: "情况描述",
+    //         render: (h, {row}: any) =>
+    //         {
+    //             return h("div", row.perent + "%");
+    //         }
+    //     }
+    // ];
+
+    protected columuns2: Array<any> =
+    [
+        {
+            title: "项目评价",
+            render: (h, {row}: any) =>
+            {
+                return h("div", this.detail.projectEvaluation || "-");
+            }
+        }
+    ];
+
+    @config({required: true, default: () => ({})})
+    protected detail: any;
+
+    @watch("detail",{immediate: true})
+    protected onChange(value)
+    {
+        this.getPublicity(value.id);
+    }
+
+    protected async getPublicity(consultPlanId)
+    {
+        // this.data = await this.projecthighlightsService.list({consultPlanId});
+    }
+}
+</script>
+
+<style lang="less" scoped>
+@import "~src/styles/business/sub-detail";
+.i-form-details
+{
+    background: #F6F8FC;
+    border: 1px solid #E7E8EC;
+    border-radius: 4px;
+    padding: 20px;
+    font-size: 14px;
+    font-family: Microsoft YaHei;
+    font-weight: 400;
+    color: #525A65;
+    line-height: 24px;
+
+}
+.img-box-item
+{
+    width: 210px;
+    height: 120px;
+    border-radius: 2px;
+    overflow: hidden;
+    background-size: cover;
+    
+    img
+    {
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+    }
+    
+}
+
+.table-normal
+{
+    margin-top: 0 !important;
+    /deep/.ivu-table th
+    {
+        background-color: #F2F6F9;
+        font-size: 14px;
+        font-family: Microsoft YaHei;
+        font-weight: 400;
+        color: #838D9C;
+        text-align: center;
+    }
+    /deep/.ivu-table-row .ivu-table-cell
+    {
+        background: none !important;
+        font-size: 14px;
+        font-family: PingFang SC;
+        font-weight: 500;
+        color: #182334;
+        padding: 8px;
+        text-align: center;
+    }
+}
+</style>
